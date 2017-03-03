@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head lang="en">
+</head>
+<body>
+	<div th:fragment="menu">
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar" >
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar" >
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu">
+					<li class="header">MAIN NAVIGATION</li>
+					<li class="active treeview"><a th:href="@{/home}"> <i
+							class="fa fa-dashboard"></i> <span>Home</span> <span
+							class="pull-right-container">
+						</span>
+					</a></li>
+					<li th:if="${admin != null}" class="treeview"><a href="admin/questions" th:href="@{/admin/questions}"> <i
+							class="fa fa-table"></i> <span>Question Master</span> <span
+							class="pull-right-container"> </span>
+					</a></li>
+
+					<li th:if="${admin != null}" class="treeview"><a href="admin/manageHashtags" th:href="@{/admin/manageHashtags}"> 
+						<i class="fa fa-th"></i> <span>Hash Tags</span>
+							<span class="pull-right-container"> </span>
+					</a></li>
+					<li th:if="${admin != null}" class="treeview"><a href="admin/retweetAccounts" th:href="@{/admin/retweetAccounts}"> <i
+							class="fa fa-edit"></i> <span>Retweet Accounts</span> <span
+							class="pull-right-container"> </span>
+					</a></li>
+				</ul>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+
+	</div>
+</body>
+</html>

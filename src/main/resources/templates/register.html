@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+<title th:text="#{title.registration}"></title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body class="hold-transition login-page">
+	<div class="login-box">
+		<div class="login-logo">
+			<a th:href="@{/}"><b th:text="#{message.appName}"></b></a>
+		</div>
+		
+		<div th:if="${SUCCESS != null}" class="alert alert-success" th:text="${SUCCESS}"></div>
+		<div th:if="${ERROR != null}" class="alert alert-error" th:text="${ERROR}"></div>
+		
+		<!-- /.login-logo -->
+		<div class="login-box-body">
+			<p class="login-box-msg" th:text="#{reg.message.displayMessage}"></p>
+
+			<form th:action="@{/user/registration}" th:object="${accountDto}" method="POST">
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" th:placeholder="#{label.firstName}" th:field="*{firstName}">
+					</input> <span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<p class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" th:placeholder="#{label.lastName}" th:field="*{lastName}">
+					</input> <span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" th:placeholder="#{label.email}" th:field="*{email}">
+					</input> <span class="glyphicon glyphicon-star form-control-feedback"></span>
+					<p class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="password" class="form-control" th:placeholder="#{label.password}" th:field="*{password}">
+					</input> <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<p class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="password" class="form-control" th:placeholder="#{label.matchingPassword}" th:field="*{matchingPassword}">
+					</input> <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<p class="help-block" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></p>
+				</div>
+				<div class="row"> 
+					<div class="col-xs-8"></div>
+					<!-- /.col -->
+					<div class="col-xs-4">
+						<button type="submit" id="submitId" class="btn btn-primary btn-block btn-flat" th:text="#{label.register}"></button>
+					</div>
+					<!-- /.col -->
+				</div>
+			</form>
+			<a th:href="@{/login}" class="text-center" th:text="#{message.alreadyRegistered}"></a>
+
+		</div>
+		<!-- /.login-box-body -->
+	</div>
+	<!-- /.login-box -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#submitId').click(function() {
+			
+		});
+		
+	});
+	</script> 
+	
+</body>
+</html>

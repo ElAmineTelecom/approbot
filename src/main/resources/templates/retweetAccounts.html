@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+<title>Retweet Accounts</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<link
+	th:href="@{/plugins/datatables/dataTables.bootstrap.css}"
+	href="../static/plugins/datatables/dataTables.bootstrap.css"
+	rel="stylesheet" />
+
+<!-- DataTables -->
+<script
+	th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<!--/*/ <th:block th:include="fragments/menu :: menu"></th:block> /*/-->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Retweet Accounts Page
+				</h1>
+				<ol class="breadcrumb">
+					<li><a th:href="@{/home}"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Retweet Accounts</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div th:if="${SUCCESS != null}" class="alert alert-success"
+					th:text="${SUCCESS}"></div>
+				<div th:if="${ERROR != null}" class="alert alert-error"
+					th:text="${ERROR}"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<form th:action="@{searchUsers}" method="post" class="sidebar-form">
+							        <div class="input-group">
+							          <input type="text" name="searchText" class="form-control" placeholder="Search Twitter Users ..."></input>
+							              <span class="input-group-btn">
+							                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+							                </button>
+							              </span>
+							        </div>
+    						  </form>
+					</div>
+					<!-- /.box -->
+					<div class="col-md-12" th:if="${searchList !=null}">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Total Records : <b th:text="${searchList.size()}"></b>
+								</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body">
+								<table id="userTable"
+									class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>#</th>
+											<th>@</th>
+											<th>Name</th>
+											<th>Location</th>
+											<th>Followers</th>
+											<th>Friends</th>
+											<th>Add to Retweet</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="user, itrStatus : ${searchList}">
+											<td th:text="${itrStatus.count}"></td>
+											<td><img th:src="@{${user.miniProfileImageURL}}" class="user-image" alt="User Image"/></td>
+											<td> @<span th:text="${user.screenName}"></span></td>
+											<td th:text="${user.name}"></td>
+											<td th:text="${user.location}"></td>
+											<td th:text="${user.followersCount}"></td>
+											<td th:text="${user.friendsCount}"></td>
+											<td> 
+											 <a href="#">
+												<span class="label label-success" th:onclick="'javascript:addToRetweet(\'' + ${user.id} +'\',\''+ ${user.screenName} + '\');'">Add</span>
+											 </a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12" th:if="${retweetList !=null}">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Manage Retweet Accounts
+								</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body">
+								<table id="userTable"
+									class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>TwitterId</th>
+											<th>Name</th>
+											<th>#</th>
+											<th>#</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="user, itrStatus : ${retweetList}">
+											<td th:text="${itrStatus.count}"></td>
+											<td th:text="${user.twitterId}"></td>
+											<td> @<span th:text="${user.name}"></span></td>
+											<td><a
+													th:href="@{/admin/changeRetweetStatus(id=${user.id})}"> <span
+														class="label label-info"
+														th:if="${user.retweet ==true}"
+														title="Click to Deactivate">Stop Retweeting</span>
+												</a> <a th:href="@{/admin/changeRetweetStatus(id=${user.id})}"><span
+														class="label label-success"
+														th:if="${user.retweet ==false}"
+														title="Click to Activate">Start Retweeting</span> </a></td>
+											 <td> 
+											  <a th:href="@{/admin/deleteRetweetAccount(id=${user.id})}">
+													<span class="label label-danger">Delete User</span>
+												</a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+	<script th:inline="javascript">
+/*<![CDATA[*/
+	var serverContext = [[@{/}]];
+	
+	 	$(function() {
+			$('#userTable').DataTable({
+				"paging" : true,
+				"lengthChange" : false,
+				"ordering" : true,
+				"info" : true,
+				"autoWidth" : true
+			});
+		});
+		
+	function addToRetweet(twitterId, name){
+		$.ajax({
+		        url : serverContext + "admin/addToRetweet/"+twitterId+"/"+name,
+		        type: "POST",
+		        success: function (response) {
+		            	alert(response);
+		        },
+		        error: function (jXHR, textStatus, errorThrown) {
+		            console.log(errorThrown);
+		            alert("Error! Unable to add to retweet account.");
+		        }
+		    }); 
+		} 
+	
+		/*]]>*/ 		
+	</script>
+</body>
+</html>

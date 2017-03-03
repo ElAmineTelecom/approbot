@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+<title>Hashtags</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+<!-- Theme style -->
+<link th:href="@{/plugins/select2/select2.min.css}"  href="../static/plugins/select2/select2.min.css"
+	rel="stylesheet" media="screen"/>
+	
+<script th:src="@{/plugins/select2/select2.full.min.js}" src="../static/plugins/select2/select2.full.min.js"></script>	
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<!--/*/ <th:block th:include="fragments/menu :: menu"></th:block> /*/-->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Hashtag Page
+				</h1>
+				<ol class="breadcrumb">
+					<li><a th:href="@{/home}"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Hashtag</li>
+				</ol>
+			</section>
+
+			<!-- Main content 
+			
+			-->
+			<section class="content">
+				<div th:if="${SUCCESS != null}" class="alert alert-success"
+					th:text="${SUCCESS}"></div>
+				<div th:if="${ERROR != null}" class="alert alert-error"
+					th:text="${ERROR}"></div>
+				<div class="row">
+				<div class="col-md-12">
+					
+					</div>
+				
+					<!-- /.box -->
+					<!-- <div class="col-md-12" th:if="${hashTagList !=null}">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Manage Hashtags
+								</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body">
+								<table id="userTable"
+									class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Hashtag</th>
+											<th>#</th>
+											<th>#</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="tag, itrStatus : ${hashTagList}">
+											<td th:text="${itrStatus.count}"></td>
+											<td th:text="${tag.tag}"></td>
+											<td><a
+													th:href="@{/admin/changeHashtagStatus(id=${tag.id})}"> <span
+														class="label label-info"
+														th:if="${tag.follow ==true}"
+														title="Click to Deactivate">Unfollow</span>
+												</a> <a th:href="@{/admin/changeHashtagStatus(id=${tag.id})}"><span
+														class="label label-success"
+														th:if="${tag.follow ==false}"
+														title="Click to Activate">Follow</span> </a></td>
+											 <td> 
+											  <a th:href="@{/admin/deleteHashtag(id=${tag.id})}">
+													<span class="label label-danger">Delete Hashtag</span>
+												</a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							 <div class="box-footer">
+                				<a th:href="@{/admin/hashtag/messages}"><button type="button" class="btn btn-info pull-right">Download Messages (CSV)</button></a>
+             				 </div>
+						</div>
+					</div> -->
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+	</script>
+</body>
+</html>

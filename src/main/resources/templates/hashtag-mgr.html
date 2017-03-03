@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+<title>Hashtags</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<!--/*/ <th:block th:include="fragments/menu :: menu"></th:block> /*/-->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Hashtag Manage Page
+				</h1>
+				<ol class="breadcrumb">
+					<li><a th:href="@{/home}"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Hashtag</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div th:if="${SUCCESS != null}" class="alert alert-success"
+					th:text="${SUCCESS}"></div>
+				<div th:if="${ERROR != null}" class="alert alert-error"
+					th:text="${ERROR}"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<form th:action="@{searchHashtag}" method="post" class="sidebar-form">
+							        <div class="input-group">
+							          <input type="text" name="searchText" class="form-control" placeholder="Search for #hashtag on Twitter ..."></input>
+							              <span class="input-group-btn">
+							                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+							                </button>
+							              </span>
+							        </div>
+    						  </form>
+					</div>
+					<!-- /.box -->
+					<div class="col-md-12" th:if="${tweetCount !=null}">
+						<div class="box">
+							<div class="box-header">
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body">
+								<table id="userTable"
+									class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Hashag</th>
+											<th>Total Tweets</th>
+											<th>Follow</th>
+										</tr>
+									</thead>  
+									<tbody>
+										<tr>
+											<td th:text="${searchText}"></td>
+											<td th:text="${tweetCount}"></td>
+											<td> 
+											 <a href="#">
+												<span class="label label-success" th:onclick="'javascript:addToFollow(\'' + ${searchText} + '\');'">Follow</span>
+											 </a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12" th:if="${hashTagList !=null}">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Manage Hashtags
+								</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body">
+								<table id="userTable"
+									class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Hashtag</th>
+											<th>#</th>
+											<th>#</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="tag, itrStatus : ${hashTagList}">
+											<td th:text="${itrStatus.count}"></td>
+											<td th:text="${tag.tag}"></td>
+											<td><a
+													th:href="@{/admin/changeHashtagStatus(id=${tag.id})}"> <span
+														class="label label-info"
+														th:if="${tag.follow ==true}"
+														title="Click to Deactivate">Unfollow</span>
+												</a> <a th:href="@{/admin/changeHashtagStatus(id=${tag.id})}"><span
+														class="label label-success"
+														th:if="${tag.follow ==false}"
+														title="Click to Activate">Follow</span> </a></td>
+											 <td> 
+											  <a th:href="@{/admin/deleteHashtag(id=${tag.id})}">
+													<span class="label label-danger">Delete Hashtag</span>
+												</a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+	<script th:inline="javascript">
+/*<![CDATA[*/
+	var serverContext = [[@{/}]];
+	
+	function addToFollow(hashTag){
+		var tag = hashTag;
+		$.ajax({
+		        url : serverContext + "admin/addToFollow/"+tag,
+		        type: "POST",
+		        success: function (response) {
+		            	alert(response);
+		        },
+		        error: function (jXHR, textStatus, errorThrown) {
+		            console.log(errorThrown);
+		            alert("Error! Unable to follow.");
+		        }
+		    }); 
+		} 
+	
+		/*]]>*/ 		
+	</script>
+</body>
+</html>

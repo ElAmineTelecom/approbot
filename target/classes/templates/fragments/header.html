@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head lang="en">
+</head>
+<body>
+
+	<div th:fragment="header">
+		<header class="main-header">
+
+			<!-- Logo -->
+			<a th:href="@{/}" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>TC</b></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b>Twitter Client</b></span>
+			</a>
+
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+					role="button"> <span class="sr-only">Toggle navigation</span>
+				</a>
+				<!-- Navbar Right Menu -->
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> 
+							<img
+								th:src="@{/img/avatar.png}" class="user-image"
+							alt="User Image"> </img><span class="hidden-xs"><span sec:authentication="principal.username" /></span>
+						</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header"><img
+									th:src="@{/img/avatar.png}" class="img-circle"
+									alt="User Image"></img>
+									<p>
+										<span sec:authentication="principal.username" /> <br/> Twitter Client App  
+									</p></li>
+								<!-- Menu Footer-->
+								<li class="user-footer">
+								<div class="pull-left">
+										<a th:href="@{http://twitter.com/SpringBotTest1}" class="btn btn-default btn-flat">Profile</a>
+									</div>
+									<div class="pull-right">
+										<a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+									</div>
+								</li>
+							</ul></li>
+					</ul>
+				</div>
+
+			</nav>
+		</header>
+
+	</div>
+</body>
+</html>
