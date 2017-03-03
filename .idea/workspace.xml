@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8aa839d1-6e99-4e32-8961-910e7de22863" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/fr/robot/twitterClient/config/GlobalSettings.java" afterPath="$PROJECT_DIR$/src/main/java/fr/robot/twitterClient/config/GlobalSettings.java" />
     </list>
     <ignored path="twitterClient.iws" />
@@ -129,8 +128,8 @@
       <file leaf-file-name="GlobalSettings.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fr/robot/twitterClient/config/GlobalSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+            <state relative-caret-position="176">
+              <caret line="8" column="108" lean-forward="false" selection-start-line="8" selection-start-column="108" selection-end-line="8" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -904,12 +903,12 @@
       <workItem from="1488466497468" duration="1382000" />
       <workItem from="1488519191837" duration="1778000" />
       <workItem from="1488534466203" duration="6280000" />
-      <workItem from="1488558120384" duration="2066000" />
+      <workItem from="1488558120384" duration="4022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23112000" />
+    <option name="totallyTimeSpent" value="25068000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1364,8 +1363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fr/robot/twitterClient/config/GlobalSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        <state relative-caret-position="176">
+          <caret line="8" column="108" lean-forward="false" selection-start-line="8" selection-start-column="108" selection-end-line="8" selection-end-column="108" />
           <folding />
         </state>
       </provider>
